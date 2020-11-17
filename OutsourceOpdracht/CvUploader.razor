@@ -1,0 +1,26 @@
+﻿@using System.Web
+
+<form method="post" enctype="multipart/form-data" action="/Upload/Upload">
+    <input type="file" asp-for="Upload" />
+    <input type="submit" />
+</form>
+
+@code{
+    [HttpPost]
+    public ActionResult Upload()
+    {
+        if (Request.Files.Count > 0)
+        {
+            var file = Request.Files[0];
+
+            if (file != null && file.ContentLength > 0)
+            {
+                var fileName = Path.GetFileName(file.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/"), fileName);
+                file.SaveAs(path);
+            }
+        }
+
+        return RedirectToAction("UploadDocument");
+    }
+}

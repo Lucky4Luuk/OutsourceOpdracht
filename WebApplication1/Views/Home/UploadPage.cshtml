@@ -1,0 +1,7 @@
+﻿@model UploadVM
+
+@using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input asp-for="File"/>
+    <input type="submit" name="Submit" id="Submit" value="Upload" />
+}
